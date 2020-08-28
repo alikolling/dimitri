@@ -1,0 +1,33 @@
+
+<launch>
+	<!-- When calling the launch file you can provide the .urdf file that you want to look at as a parameter.
+	Example: roslaunch your_pkg_name inspect_urdf.launch model:='$(find your_pkg_name)/path/to/your_urdf.urdf' -->
+	
+	<arg name="model" default="$(find dimitri_description)/urdf/dimitri.urdf"/>
+	<arg name="rvizconfig" default="$(find dimitri_description)/rviz/urdf.rviz" />
+    <arg name="x_pos" default="0.0"/>
+    <arg name="y_pos" default="0.0"/>
+    <arg name="z_pos" default="0.0"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find dimitri_description)/worlds/empty.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+	
+	<param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+		<param name="use_gui" value="TRUE"/>
+	</node>
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model dimitri -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+
+</launch>
