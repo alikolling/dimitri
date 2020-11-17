@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import rospy
 from std_msgs.msg import Float64
@@ -6,7 +6,7 @@ from std_msgs.msg import Float64
 
 class InitialPosition:
     def __init__(self):
-        pub = [rospy.Publisher('/dimitri/joint'+str(i)+'_position_controller/command', Float64, queue_size=10)
+        pub = [rospy.Publisher('/dimitri/joint'+str(i)+'_position_controller/command/', Float64, queue_size=10)
                for i in range(1, 19)]
         rate = rospy.Rate(60)
 
