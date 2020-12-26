@@ -122,6 +122,14 @@
         </geometry>
       </collision>
     </link>
+    
+    <link name="left_end_factor">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.001"/>
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+      </inertial>
+    </link>
 
     <link name="left_hand_link">
       <inertial>
@@ -310,6 +318,14 @@
           <mesh filename="package://dimitri_description/meshes/dae/Plane.011.dae" scale="1.0 1.0 1.0"/>
         </geometry>
       </collision>
+    </link>
+    
+    <link name="right_end_factor">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.001"/>
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+      </inertial>
     </link>
 
     <link name="right_shoulder_link">
@@ -500,6 +516,12 @@
       <axis xyz="0 0 1.0"/>
       <limit lower="0" upper="1.5708" effort="10.0" velocity="0.03491"/>
     </joint>
+    
+    <joint name="left_end_factor_joint" type="fixed">
+      <origin xyz="-0.00288 0.17394 0.00113" rpy="0 -3.14159 0"/>
+      <parent link="left_hand_link"/>
+      <child link="left_end_factor"/>
+    </joint>
 
     <joint name="left_shoulder_joint" type="revolute">
       <origin xyz="0.01176 0.11735 0.01717" rpy="1.5708 -1.5708 0"/>
@@ -563,6 +585,12 @@
       <child link="right_hand_link"/>
       <axis xyz="0 0 1.0"/>
       <limit lower="0" upper="1.5708" effort="10.0" velocity="0.03491"/>
+    </joint>
+    
+    <joint name="right_end_factor_joint" type="fixed">
+      <origin xyz="0.0026 -0.17836 0.00053" rpy="0 0 0"/>
+      <parent link="right_hand_link"/>
+      <child link="right_end_factor"/>
     </joint>
 
     <joint name="right_shoulder_joint" type="revolute">
