@@ -479,8 +479,8 @@
       <child link="base_link"/>
     </joint>
 
-    <joint name="camera_joint" type="fixed">
-      <origin xyz="-0.0085 -0.11925 0.00567" rpy="1.5708 0 0.68865"/>
+    <joint name="camera_link" type="fixed">
+      <origin xyz="-0.01667 -0.11925 0.00567" rpy="1.5708 0 0.09495"/>
       <parent link="head_link"/>
       <child link="camera_link"/>
     </joint>
@@ -884,6 +884,14 @@
 
   <material name="BLACK">
     <color rgba="0.00291 0.00291 0.00291 1.0"/>
+  </material>
+  
+  <material name="aluminio">
+    <color rgba="0.46935 0.46935 0.46935 1.0"/>
+  </material>
+
+  <material name="base">
+    <color rgba="0.64 0.05951 0.02313 1.0"/>
   </material>
 
   </robot>

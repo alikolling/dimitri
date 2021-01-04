@@ -5,13 +5,45 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0 commit date:2018-03-22, commit time:14:10, hash:f4dc9f9d68b</authoring_tool>
     </contributor>
-    <created>2020-08-26T02:57:49</created>
-    <modified>2020-08-26T02:57:49</modified>
+    <created>2021-01-04T14:02:29</created>
+    <modified>2021-01-04T14:02:29</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_images/>
-  <library_effects/>
+  <library_effects>
+    <effect id="aluminio-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color sid="diffuse">0.4693493 0.4693493 0.4693493 1</color>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="aluminio-material" name="aluminio">
+      <instance_effect url="#aluminio-effect"/>
+    </material>
+  </library_materials>
   <library_geometries>
     <geometry id="Plane_002-mesh" name="Plane.002">
       <mesh>
@@ -51,7 +83,7 @@
           <input semantic="VERTEX" source="#Plane_002-mesh-vertices" offset="0"/>
           <p>0 1</p>
         </lines>
-        <triangles count="28">
+        <triangles material="aluminio-material" count="28">
           <input semantic="VERTEX" source="#Plane_002-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Plane_002-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#Plane_002-mesh-map-0" offset="2" set="0"/>
@@ -65,7 +97,13 @@
     <visual_scene id="Scene" name="Scene">
       <node id="right_shoulder" name="right_shoulder" type="NODE">
         <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
-        <instance_geometry url="#Plane_002-mesh" name="right_shoulder"/>
+        <instance_geometry url="#Plane_002-mesh" name="right_shoulder">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="aluminio-material" target="#aluminio-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
       </node>
     </visual_scene>
   </library_visual_scenes>

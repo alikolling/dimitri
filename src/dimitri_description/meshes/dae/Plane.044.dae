@@ -5,13 +5,45 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0 commit date:2018-03-22, commit time:14:10, hash:f4dc9f9d68b</authoring_tool>
     </contributor>
-    <created>2020-08-26T02:57:49</created>
-    <modified>2020-08-26T02:57:49</modified>
+    <created>2021-01-04T14:02:29</created>
+    <modified>2021-01-04T14:02:29</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_images/>
-  <library_effects/>
+  <library_effects>
+    <effect id="aluminio-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color sid="diffuse">0.4693493 0.4693493 0.4693493 1</color>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="aluminio-material" name="aluminio">
+      <instance_effect url="#aluminio-effect"/>
+    </material>
+  </library_materials>
   <library_geometries>
     <geometry id="Plane_044-mesh" name="Plane.044">
       <mesh>
@@ -38,7 +70,7 @@
         <vertices id="Plane_044-mesh-vertices">
           <input semantic="POSITION" source="#Plane_044-mesh-positions"/>
         </vertices>
-        <triangles count="44">
+        <triangles material="aluminio-material" count="44">
           <input semantic="VERTEX" source="#Plane_044-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Plane_044-mesh-normals" offset="1"/>
           <p>4 0 16 0 5 0 6 1 1 1 2 1 2 2 23 2 6 2 10 3 15 3 11 3 9 3 14 3 10 3 8 3 13 3 9 3 6 0 13 0 5 0 1 4 10 4 2 4 5 0 12 0 4 0 4 2 8 2 0 2 3 5 15 5 7 5 7 0 14 0 6 0 2 4 11 4 3 4 0 4 9 4 1 4 22 1 21 1 20 1 16 1 19 1 18 1 0 2 17 2 4 2 7 5 20 5 3 5 6 0 22 0 7 0 3 4 21 4 2 4 1 4 19 4 0 4 5 5 18 5 1 5 4 0 17 0 16 0 6 1 5 1 1 1 2 2 21 2 23 2 10 3 14 3 15 3 9 3 13 3 14 3 8 3 12 3 13 3 6 0 14 0 13 0 1 4 9 4 10 4 5 0 13 0 12 0 4 2 12 2 8 2 3 5 11 5 15 5 7 0 15 0 14 0 2 4 10 4 11 4 0 4 8 4 9 4 22 1 23 1 21 1 16 1 17 1 19 1 0 2 19 2 17 2 7 5 22 5 20 5 6 0 23 0 22 0 3 4 20 4 21 4 1 4 18 4 19 4 5 5 16 5 18 5</p>
@@ -51,7 +83,13 @@
     <visual_scene id="Scene" name="Scene">
       <node id="rigth_wrist" name="rigth_wrist" type="NODE">
         <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
-        <instance_geometry url="#Plane_044-mesh" name="rigth_wrist"/>
+        <instance_geometry url="#Plane_044-mesh" name="rigth_wrist">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="aluminio-material" target="#aluminio-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
       </node>
     </visual_scene>
   </library_visual_scenes>
